@@ -1,6 +1,5 @@
 # Data Warehouse Pipeline & Analytics
-
-Simple and structured Data Warehouse pipeline based on the Medallion Architecture (Bronze, Silver, Gold).
+This project demonstrates an end-to-end Data Warehouse workflow that ingests raw data from operational systems, cleanses and standardizes it, and builds business-ready data models. By following the Medallion Architecture, it transforms unstructured data inputs into structured Star Schemas and views ready for analysis.
 
 ---
 
