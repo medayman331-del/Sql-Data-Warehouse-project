@@ -18,6 +18,9 @@ GO
 -------------------------------------------------------------------------------
 -- Drop existing tables if they exist (in reverse order of dependencies)
 -------------------------------------------------------------------------------
+IF OBJECT_ID('bronze.crm_cust_info', 'U') IS NOT NULL
+    DROP TABLE bronze.crm_cust_info;
+
 IF OBJECT_ID('bronze.crm_prd_info', 'U') IS NOT NULL
     DROP TABLE bronze.crm_prd_info;
 
@@ -35,7 +38,21 @@ IF OBJECT_ID('bronze.erp_px_cat_g1v2', 'U') IS NOT NULL
 GO
 
 -------------------------------------------------------------------------------
--- 1. Create CRM Products Info Table
+-- 1. Create CRM Customer Info Table
+-------------------------------------------------------------------------------
+CREATE TABLE bronze.crm_cust_info (
+    cst_id           INT,
+    cst_key          NVARCHAR(50),
+    cst_firstname    NVARCHAR(50),
+    cst_lastname     NVARCHAR(50),
+    cst_marital_status NVARCHAR(50),
+    cst_gndr         NVARCHAR(50),
+    cst_create_date  DATE
+);
+GO
+
+-------------------------------------------------------------------------------
+-- 2. Create CRM Products Info Table
 -------------------------------------------------------------------------------
 CREATE TABLE bronze.crm_prd_info (
     prd_id       INT,
@@ -49,7 +66,7 @@ CREATE TABLE bronze.crm_prd_info (
 GO
 
 -------------------------------------------------------------------------------
--- 2. Create CRM Sales Details Table
+-- 3. Create CRM Sales Details Table
 -------------------------------------------------------------------------------
 CREATE TABLE bronze.crm_sales_details (
     sls_ord_num  NVARCHAR(50),
@@ -65,7 +82,7 @@ CREATE TABLE bronze.crm_sales_details (
 GO
 
 -------------------------------------------------------------------------------
--- 3. Create ERP Customer Demographics Table (CUST_AZ12)
+-- 4. Create ERP Customer Demographics Table (CUST_AZ12)
 -------------------------------------------------------------------------------
 CREATE TABLE bronze.erp_cust_az12 (
     cid    NVARCHAR(50),
@@ -75,7 +92,7 @@ CREATE TABLE bronze.erp_cust_az12 (
 GO
 
 -------------------------------------------------------------------------------
--- 4. Create ERP Customer Locations Table (LOC_A101)
+-- 5. Create ERP Customer Locations Table (LOC_A101)
 -------------------------------------------------------------------------------
 CREATE TABLE bronze.erp_loc_a101 (
     cid    NVARCHAR(50),
@@ -84,7 +101,7 @@ CREATE TABLE bronze.erp_loc_a101 (
 GO
 
 -------------------------------------------------------------------------------
--- 5. Create ERP Product Categories Table (PX_CAT_G1V2)
+-- 6. Create ERP Product Categories Table (PX_CAT_G1V2)
 -------------------------------------------------------------------------------
 CREATE TABLE bronze.erp_px_cat_g1v2 (
     id           NVARCHAR(50),
